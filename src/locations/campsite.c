@@ -32,7 +32,7 @@ void campsiteLoop(Player *player){
                 rest(*player);
                 break;
             case 2:
-                printf("Inventory");
+                showInventory(*player);
                 break;
             case 3:
                 printf("You explore");
