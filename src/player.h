@@ -1,5 +1,15 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
+typedef struct Backpack{
+    int maxSlots;
+    int totalValue;
+} Backpack;
+
 typedef struct Player{
-    char playerName[20];
+    char *playerName;
+    int location;
+    Backpack *Backpack;
     
     int playerHealth;
     int playerMaxHealth;
@@ -10,3 +20,8 @@ typedef struct Player{
     int playerGold;
     int playerLevel;
 } Player;
+
+extern void displayPlayerStats(Player player);
+extern void rest(Player player);
+
+#endif
