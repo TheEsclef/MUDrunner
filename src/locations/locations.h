@@ -2,5 +2,6 @@
 #define LOCATIONS_H
 
 #include "campsite.h"
+#include "town.h"
 
 #endif

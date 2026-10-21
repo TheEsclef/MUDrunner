@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "../player.h"
 #include "../textHandling/textHandler.h"
+#include "../exploring/exploring.h"
 
 void campsiteLoop(Player *player)
 {
@@ -41,7 +42,7 @@ void campsiteLoop(Player *player)
             showGear(player);
             break;
         case 4:
-            printf("Explore");
+            player->location = 1;
             break;
         }
     }

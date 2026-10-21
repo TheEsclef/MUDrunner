@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "player.h"
 #include "locations/locations.h"
+#include "exploring/exploring.h"
 #include "textHandling/textHandler.h"
 #include "items/items.h"
 
@@ -18,7 +19,7 @@ void initialize(Player *player, Backpack backpack, Gear gear)
     printWrapped("-- WELCOME TO MUD RUNNER --", Centered);
     printBorder();
     printWrapped("Please enter your name\n", Centered);
-    scanf("%19s", name);
+    scanf("%[^\n]", name);
     player->playerName = name;
     player->gear = gear;
 
@@ -37,31 +38,34 @@ void initialize(Player *player, Backpack backpack, Gear gear)
     player->playerGold = 0;
     player->playerLevel = 1;
 
-    Item starterSword = createWeaponItem(copperSword);
+    Item starterSword = createWeaponItem(noWeapon);
     equipGear(player, &starterSword);
 
-    Item starterShield = createShieldItem(copperShield);
+    Item starterShield = createShieldItem(noShield);
     equipGear(player, &starterShield);
 
-    Item starterHelmet = createHelmetItem(ironHelmet);
+    Item starterHelmet = createHelmetItem(noHelmet);
     equipGear(player, &starterHelmet);
 
-    Item starterLeggings = createLeggingsItem(ironLeggings);
+    Item starterLeggings = createLeggingsItem(noLeggings);
     equipGear(player, &starterLeggings);
 
-    Item starterChestplate = createChestplateItem(ironChestplate);
+    Item starterChestplate = createChestplateItem(noChestplate);
     equipGear(player, &starterChestplate);
 }
 
 // Function for handling the main game loop and logic
-void update(Player player)
+void update(Player *player)
 {
     system("cls");
 
-    switch (player.location)
+    switch (player->location)
     {
     case 0:                   // If the player is in the campsite
         campsiteLoop(player); // Enters the campsite's loop in campsite.c
+    case 1:                   // If the player is in exploring mode
+        explore(player);      // Enter the explore function
+        break;
     }
 }
 
@@ -80,7 +84,7 @@ int main()
 
     while (isGameOver == 0)
     {
-        update(player);
+        update(&player);
     }
 
     return 0;

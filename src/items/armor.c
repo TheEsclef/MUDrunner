@@ -1,5 +1,26 @@
 #include "armor.h"
 
+Helmet noHelmet = {
+    "None",
+    "Nothing, but your bald head",
+    0,
+    0
+};
+
+Chestplate noChestplate = {
+    "None",
+    "Nothing, but your ugly nipples",
+    0,
+    0
+};
+
+Leggings noLeggings = {
+    "None",
+    "Nothing, but your hairy legs",
+    0,
+    0
+};
+
 Helmet ironHelmet = {
     "Iron Helmet",
     "A sturdy iron helmet.",

@@ -17,6 +17,9 @@ typedef struct Shield
     int value;
 } Shield;
 
+extern Weapon noWeapon;
+extern Shield noShield;
+
 extern Weapon woodenSword;
 extern Shield woodenShield;
 

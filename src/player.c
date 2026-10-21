@@ -91,6 +91,93 @@ void addItemToBag(Item itemToAdd, Backpack *backpack)
     backpack->totalValue += itemToAdd.value;
 }
 
+// Function for removing items from the bag
+void removeItemFromBag(Backpack *backpack, int slot)
+{
+    // Failsafe
+    if (slot < 0 || slot >= backpack->slotsUsed)
+        return;
+
+    // Update the total value
+    backpack->totalValue -= backpack->items[slot].value;
+
+    // Shift everything to the right of the removed item to the left by 1
+    for (int i = slot; i < backpack->slotsUsed - 1; i++)
+    {
+        backpack->items[i] = backpack->items[i + 1];
+    }
+
+    backpack->slotsUsed--;
+}
+
+void unequipGear(Player *player, int slot)
+{
+    Item item;
+
+    switch (slot)
+    {
+    case 1: // Weapon
+        if (strcmp(player->gear.weapon.weaponName, "None") == 0)
+        {
+            break;
+        }
+        item = createWeaponItem(player->gear.weapon);
+        addItemToBag(item, &player->Backpack);
+
+        player->playerDMG -= player->gear.weapon.weaponDamage;
+        player->gear.weapon = noWeapon;
+        break;
+
+    case 2: // Shield
+        if (strcmp(player->gear.shield.shieldName, "None") == 0)
+        {
+            break;
+        }
+        item = createShieldItem(player->gear.shield);
+        addItemToBag(item, &player->Backpack);
+
+        player->playerDefence -= player->gear.shield.shieldDefence;
+        player->gear.shield = noShield;
+        break;
+
+    case 3: // Helmet
+        if (strcmp(player->gear.helmet.itemName, "None") == 0)
+        {
+            break;
+        }
+        item = createHelmetItem(player->gear.helmet);
+        addItemToBag(item, &player->Backpack);
+
+        player->playerDefence -= player->gear.helmet.defenseValue;
+        player->gear.helmet = noHelmet;
+        break;
+
+    case 4: // Chestplate
+        if (strcmp(player->gear.chestplate.itemName, "None") == 0)
+        {
+            break;
+        }
+        item = createChestplateItem(player->gear.chestplate);
+        addItemToBag(item, &player->Backpack);
+
+        player->playerDefence -= player->gear.chestplate.defenseValue;
+        player->gear.chestplate = noChestplate;
+        break;
+
+    case 5: // Leggings
+        if (strcmp(player->gear.leggings.itemName, "None") == 0)
+        {
+            break;
+        }
+        item = createLeggingsItem(player->gear.leggings);
+        addItemToBag(item, &player->Backpack);
+
+        player->playerDefence -= player->gear.leggings.defenseValue;
+        player->gear.leggings = noLeggings;
+        break;
+    }
+}
+
 // Function for displaying player's gear
 // Creates a new page
 void showGear(Player *player)
@@ -169,7 +256,16 @@ void showGear(Player *player)
         switch (x)
         {
         case 1: // User picked unequip item
-            printf("unequipping");
+            system("cls");
+
+            printBorder();
+            printWrapped("Choose what you'd like to remove", Centered);
+            printWrapped("1 - Weapon | 2 - Shield | 3 - Helmet | 4 - Chestplate | 5 - Leggings", Centered);
+            printWrapped("ENTER 0 TO EXIT THE UNEQUIP PAGE", Centered);
+            printBorder();
+
+            scanf("%d", &x);
+            unequipGear(player, x);
             break;
         case 2: // User picked exit gear page
             gearShouldClose = 1;
@@ -228,11 +324,20 @@ void showInventory(Player *player)
             printWrapped("Choose an item by it's Slot to equip:", Centered);
             scanf("%d", &x);
             equipGear(player, &player->Backpack.items[x - 1]);
+            removeItemFromBag(&player->Backpack, x-1);
             printWrapped("Equipped Item!", Centered);
             Sleep(1000);
             break;
+            
         case 2: // User picked remove
-            printf("removing item...");
+            printBorder();
+            printWrapped("Enter the slot number of the Item you'd like to discard", Centered);
+            scanf("%d", &x);
+            removeItemFromBag(&player->Backpack, x-1);
+
+            printBorder();
+            printWrapped("Successfully removed the Item from the bag", Centered);
+            Sleep(1000);
             break;
         }
     }

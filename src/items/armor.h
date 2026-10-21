@@ -25,6 +25,11 @@ typedef struct Chestplate
     int value;
 } Chestplate;
 
+extern Helmet noHelmet;
+extern Chestplate noChestplate;
+extern Leggings noLeggings;
+
+
 extern Helmet ironHelmet;
 extern Chestplate ironChestplate;
 extern Leggings ironLeggings;

@@ -1,5 +1,19 @@
 #include "weapons.h"
 
+Weapon noWeapon = {
+    "None",
+    "Nothing, but your bare fists",
+    1,
+    0
+};
+
+Shield noShield = {
+    "None",
+    "Nothing, but your bare fists",
+    0,
+    0
+};
+
 /* Wooden equipment */
 Weapon woodenSword = {
     "Wooden Sword",
