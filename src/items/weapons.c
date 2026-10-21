@@ -1,4 +1,3 @@
-
 #include "weapons.h"
 
 /* Wooden equipment */

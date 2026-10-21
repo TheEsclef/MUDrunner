@@ -6,6 +6,15 @@
 #define WINDOW_WIDTH 100
 #define WINDOW_HEIGHT 40
 
+/*
+    THIS FILE IS PRIMARILY FOR HANDLING HOW TEXT IS DISPLAYED
+    THINK OF THIS AS A LIBRARY OF MODULES
+    PRIMARY REASON FOR THIS FILE IS TO CREATE A FIXED "WINDOW SIZE" FOR THE GAME INSIDE A TERMINAL
+*/
+
+// Function to print out text, also takes in an alignment for text alignment
+// example printWrapped("Hello World", Centered);
+// This prints out "Hello World" in the middle of the window
 void printWrapped(const char *text, TextAlignment alignment)
 {
     int len = strlen(text);
@@ -73,6 +82,8 @@ void printWrapped(const char *text, TextAlignment alignment)
     }
 }
 
+// This function is primarily used to print out the stats of yourself
+// Or to print out the stats of an enemy
 void printStatsRow(const char *left, const char *right)
 {
     int contentWidth = WINDOW_WIDTH;
@@ -88,6 +99,7 @@ void printStatsRow(const char *left, const char *right)
            right);
 }
 
+// This simply prints out a border, used to manage readability ingame
 void printBorder(void)
 {
     putchar('+');
@@ -100,6 +112,7 @@ void printBorder(void)
     printf("+\n");
 }
 
+// Sets the console's size
 void setConsoleSize(void)
 {
     HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);

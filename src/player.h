@@ -14,15 +14,9 @@ typedef struct Gear
 {
     Weapon weapon;
     Shield shield;
-
-    // TO DO
-    // helmet
-    // chest
-    // leggings
-    // gloves
-    // boots
-    // ring
-    // necklace
+    Helmet helmet;
+    Leggings leggings;
+    Chestplate chestplate;
 } Gear;
 
 typedef struct Player
@@ -45,6 +39,8 @@ typedef struct Player
 extern void displayPlayerStats(Player player);
 extern void rest(Player player);
 extern void addItemToBag(Item itemToAdd, Backpack *backpack);
-extern void showInventory(Player player);
+extern void showInventory(Player *player);
+extern void showGear(Player *player);
+extern void equipGear(Player *player, Item *item);
 
 #endif
