@@ -44,6 +44,7 @@ void goToTown(Player *player)
                 printWrapped("The sound of morning dew hitting the water make you want to pee", Centered);
                 Sleep(2000);
                 printWrapped("FINALLY! You caught a fish", Centered);
+                Sleep(2000);
                 break;
             case 3:
                 system("cls");
@@ -114,7 +115,7 @@ void explore(Player *player)
 
         if (strcmp(action, "North") == 0)
         {
-            campsiteLoop(player);
+            player->location = 0;
             isExploring = 0;
         }
         else if (strcmp(action, "South") == 0)
