@@ -23,14 +23,18 @@ void initialize(Player *player, Backpack backpack, Gear gear)
     player->playerName = name;
     player->gear = gear;
 
+    // Set the values for player's bag
     backpack.maxSlots = 28;
     backpack.slotsUsed = 0;
     backpack.totalValue = 0;
     backpack.items = malloc(backpack.maxSlots * sizeof(Item));
 
+    // Set the player to be at the campsite
+    // Also give him the backpack
     player->location = 0;
     player->Backpack = backpack;
 
+    // Initialize values for the player
     player->playerMaxHealth = 10;
     player->playerHealth = 10;
     player->playerDMG = 0;
@@ -38,18 +42,15 @@ void initialize(Player *player, Backpack backpack, Gear gear)
     player->playerGold = 0;
     player->playerLevel = 1;
 
+    // Create empty item for the player and equip that gear
     Item starterSword = createWeaponItem(noWeapon);
     equipGear(player, &starterSword);
-
     Item starterShield = createShieldItem(noShield);
     equipGear(player, &starterShield);
-
     Item starterHelmet = createHelmetItem(noHelmet);
     equipGear(player, &starterHelmet);
-
     Item starterLeggings = createLeggingsItem(noLeggings);
     equipGear(player, &starterLeggings);
-
     Item starterChestplate = createChestplateItem(noChestplate);
     equipGear(player, &starterChestplate);
 }
